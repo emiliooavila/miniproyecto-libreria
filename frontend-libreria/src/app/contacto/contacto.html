@@ -1,1 +1,44 @@
-<p>contacto works!</p>
+<div style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+  <h2>Contáctanos</h2>
+
+  <div *ngIf="mensajeEnviado" style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+    ¡Gracias! Tu mensaje ha sido enviado y guardado en la base de datos.
+  </div>
+
+  <form [formGroup]="contactoForm" (ngSubmit)="enviarDatos()">
+    
+    <div style="margin-bottom: 15px;">
+      <label>Nombre:</label><br>
+      <input type="text" formControlName="nombre" style="width: 100%; padding: 8px;">
+      <span *ngIf="contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched" style="color: red; font-size: 0.8rem;">
+        El nombre es obligatorio.
+      </span>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Correo Electrónico:</label><br>
+      <input type="email" formControlName="correo" style="width: 100%; padding: 8px;">
+      <span *ngIf="contactoForm.get('correo')?.hasError('required') && contactoForm.get('correo')?.touched" style="color: red; font-size: 0.8rem;">
+        El correo es obligatorio.
+      </span>
+      <span *ngIf="contactoForm.get('correo')?.hasError('email') && contactoForm.get('correo')?.touched" style="color: red; font-size: 0.8rem;">
+        Debe ser un correo válido (ejemplo@dominio.com).
+      </span>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Asunto:</label><br>
+      <input type="text" formControlName="asunto" style="width: 100%; padding: 8px;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Mensaje:</label><br>
+      <textarea formControlName="mensaje" rows="4" style="width: 100%; padding: 8px;"></textarea>
+    </div>
+
+    <button type="submit" [disabled]="contactoForm.invalid" 
+            style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+      Enviar Mensaje
+    </button>
+  </form>
+</div>

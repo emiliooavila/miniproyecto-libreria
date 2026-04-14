@@ -6,15 +6,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductosService {
-  private apiUrl = 'http://localhost:3000/api/productos';
+  private apiUrl = 'http://localhost:3000/api'; 
 
   constructor(private http: HttpClient) { }
 
   getProductos(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get(`${this.apiUrl}/productos`); 
   }
 
   getProductoById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+    return this.http.get(`${this.apiUrl}/productos/${id}`);
+  }
+
+  enviarMensaje(datosMensaje: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/mensajes`, datosMensaje);
   }
 }

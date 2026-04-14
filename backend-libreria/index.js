@@ -56,6 +56,21 @@ app.post('/api/mensajes', async (req, res) => {
     }
 });
 
+// Obtener un solo objeto libro por ID 
+app.get('/api/productos/:id', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM productos WHERE id = ?', [req.params.id]);
+        if (rows.length > 0) {
+            res.json(rows[0]);
+        } else {
+            res.status(404).json({ error: 'Libro no encontrado' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al obtener el libro' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en \x1b[34mhttp://localhost:${PORT}\x1b[0m`);
 });
