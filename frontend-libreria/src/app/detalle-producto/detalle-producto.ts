@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductosService } from '../services/productos';
+
 
 @Component({
   selector: 'app-detalle-producto',
@@ -14,19 +15,27 @@ export class DetalleProductoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productosService: ProductosService
+    private productosService: ProductosService,
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    // 1. Extraemos el ID numérico de la URL
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    
-    // 2. Le pedimos al backend la información de ese ID
+    console.log('Paso 1 - ID detectado en la URL:', id); 
+
+    console.log('Paso 2 - Pidiendo datos al backend...');
     this.productosService.getProductoById(id).subscribe({
-      next: (data) => {
-        this.libro = data;
+      next: (data: any) => {
+        console.log('Paso 3 - ¡Datos recibidos del backend!:', data); 
+        this.ngZone .run(() => {
+          this.libro = data;
+          this.cdr.detectChanges();
+        });
       },
-      error: (err) => console.error('Error al cargar detalle:', err)
+      error: (err: any) => {
+        console.error('Error catastrófico al buscar el libro:', err);
+      }
     });
   }
 }

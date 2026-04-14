@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, NgZone, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductosService } from '../services/productos';
@@ -13,14 +13,21 @@ import { ProductosService } from '../services/productos';
 export class CatalogoComponent implements OnInit {
   libros: any[] = [];
 
-  constructor(private productosService: ProductosService) {}
+  constructor(
+    private productosService: ProductosService,
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     console.log('Cargando catálogo de libros...');
     this.productosService.getProductos().subscribe({
       next: (datos) => {
-        this.libros = datos;
-        console.log('Libros cargados:', this.libros);
+        this.ngZone.run(() => {
+          this.libros = datos;
+          this.cdr.detectChanges(); 
+          console.log('Libros cargados:', this.libros);
+        });
       },
       error: (error) => {
         console.error('Error al cargar la API:', error);

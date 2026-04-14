@@ -1,5 +1,8 @@
 <div *ngIf="libro" style="padding: 20px; max-width: 600px; margin: auto;">
-  <button routerLink="/catalogo" style="margin-bottom: 20px;">⬅ Volver al catálogo</button>
+  
+  <button routerLink="/catalogo" style="margin-bottom: 20px; padding: 5px 10px; cursor: pointer;">
+    ⬅ Volver al catálogo
+  </button>
   
   <div style="display: flex; gap: 20px;">
     <img [src]="libro.imagen" alt="{{ libro.nombre }}" width="250" style="border-radius: 8px;">
@@ -7,16 +10,20 @@
     <div>
       <h1>{{ libro.nombre }}</h1>
       <h3 style="color: gray;">{{ libro.marca }}</h3>
+      
       <p style="font-size: 1.2rem; color: #d35400;"><strong>{{ libro.precio | currency }}</strong></p>
       
       <p style="margin-top: 20px;"><strong>Sinopsis:</strong><br> {{ libro.descripcion }}</p>
+      <p><strong>Categoría:</strong> {{ libro.categoria }}</p>
+      <p><strong>Disponibles:</strong> {{ libro.stock }}</p>
       
-      <p>Categoría: {{ libro.categoria }}</p>
-      <button style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer;">Comprar Ahora</button>
+      <button style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; margin-top: 10px;">
+        Comprar Ahora
+      </button>
     </div>
   </div>
 </div>
 
-<div *ngIf="!libro">
+<div *ngIf="!libro" style="padding: 20px; text-align: center; font-size: 1.2rem;">
   <p>Cargando información del libro...</p>
 </div>
