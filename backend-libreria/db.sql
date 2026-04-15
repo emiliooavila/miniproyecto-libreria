@@ -6,6 +6,7 @@ USE libreria_db;
 CREATE TABLE productos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(150) NOT NULL,
+    isbn VARCHAR(20),
     categoria VARCHAR(100) NOT NULL,
     marca VARCHAR(100),
     precio DECIMAL(10,2) NOT NULL,
@@ -26,6 +27,6 @@ CREATE TABLE mensajes (
 );
 
 -- Insertar algunos libros de ciencia ficción de prueba
-INSERT INTO productos (nombre, categoria, marca, precio, stock, imagen, descripcion, disponible) VALUES
-('Realidad Disruptiva', 'Coming of Age', 'Amazon independent', 350.00, 15, 'https://ruta-imagen.com/materia.jpg', 'Un thriller fascinante sobre realidades paralelas', TRUE),
-('El Fin de la Eternidad', 'Viajes en el tiempo', 'SciFi Classics', 280.50, 8, 'https://ruta-imagen.com/eternidad.jpg', 'Los Eternos vigilan y modifican la historia humana, hasta que un técnico descubre el verdadero costo de la perfección temporal.', TRUE);
+INSERT INTO productos (nombre, isbn, categoria, marca, precio, stock, imagen, descripcion, disponible) VALUES
+('Harry Potter', '9780545582889', 'Fantasia', 'Penguin Random House', 349.00, 15, '', 'Una historia de magia y aventuras', TRUE),
+('Dune Messiah', '9780441172696', 'Ciencia Ficcion', 'SciFi Classics', 299.00, 8, '', 'Una novela de politica, elegidos y traiciones', TRUE);

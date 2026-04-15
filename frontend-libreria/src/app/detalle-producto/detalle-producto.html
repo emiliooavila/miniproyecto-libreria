@@ -5,13 +5,16 @@
   </button>
   
   <div style="display: flex; gap: 20px;">
-    <img [src]="libro.imagen" alt="{{ libro.nombre }}" width="250" style="border-radius: 8px;">
+    <img *ngIf="libro.imagen" [src]="libro.imagen" alt="{{ libro.nombre }}" width="250">
+    <img *ngIf="!libro.imagen && libro.isbn" src="https://covers.openlibrary.org/b/isbn/{{ libro.isbn }}-L.jpg" alt="{{ libro.nombre }}" width="250">
     
     <div>
       <h1>{{ libro.nombre }}</h1>
       <h3 style="color: gray;">{{ libro.marca }}</h3>
       
       <p style="font-size: 1.2rem; color: #d35400;"><strong>{{ libro.precio | currency }}</strong></p>
+      
+      <p *ngIf="libro.isbn"><strong>ISBN:</strong> {{ libro.isbn }}</p>
       
       <p style="margin-top: 20px;"><strong>Sinopsis:</strong><br> {{ libro.descripcion }}</p>
       <p><strong>Categoría:</strong> {{ libro.categoria }}</p>

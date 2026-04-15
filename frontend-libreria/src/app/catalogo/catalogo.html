@@ -1,18 +1,23 @@
-<h2>Catálogo de Ciencia Ficción</h2>
+<h2>Catálogo</h2>
 
 <div class="catalogo-grid">
   <div *ngFor="let libro of libros" class="tarjeta-libro" style="border: 1px solid #ccc; padding: 15px; margin-bottom: 10px;">
     
-    <img [src]="libro.imagen" alt="{{ libro.nombre }}" width="150">
+    <img *ngIf="libro.imagen" [src]="libro.imagen" alt="{{ libro.nombre }}">
+    <img *ngIf="!libro.imagen && libro.isbn" src="https://covers.openlibrary.org/b/isbn/{{ libro.isbn }}-M.jpg" alt="{{ libro.nombre }}">
     
     <h3>{{ libro.nombre }}</h3>
     <p><strong>Editorial:</strong> {{ libro.marca | uppercase }}</p>
-    <p><strong>Precio:</strong> {{ libro.precio | currency }}</p>
+    <p *ngIf="libro.isbn"><strong>ISBN:</strong> {{ libro.isbn }}</p>
+    <p style="font-size: 1.1rem; color: #d35400;"><strong>Precio:</strong> {{ libro.precio | currency }}</p>
     
     <p *ngIf="libro.stock > 0" style="color: green;">Disponibles: {{ libro.stock }}</p>
     <p *ngIf="libro.stock === 0" style="color: red;">Agotado</p>
     
-    <button [routerLink]="['/productos', libro.id]">Ver Detalles</button>
-    <button>Agregar al Carrito</button>
+    <div style="display: flex; gap: 10px; margin-top: 15px;">
+      <button [routerLink]="['/productos', libro.id]" style="padding: 8px 15px; cursor: pointer;">Ver Detalles</button>
+      <button style="padding: 8px 15px; background-color: #28a745; color: white; border: none; cursor: pointer;">Agregar al Carrito</button>
+    </div>
+    
   </div>
 </div>
