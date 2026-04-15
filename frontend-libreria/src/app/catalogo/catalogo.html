@@ -1,23 +1,53 @@
-<h2>Catálogo</h2>
-
-<div class="catalogo-grid">
-  <div *ngFor="let libro of libros" class="tarjeta-libro" style="border: 1px solid #ccc; padding: 15px; margin-bottom: 10px;">
+<div class="catalogo-layout">
+  <aside class="filtros-sidebar">
+    <h3>Filtros</h3>
     
-    <img *ngIf="libro.imagen" [src]="libro.imagen" alt="{{ libro.nombre }}">
-    <img *ngIf="!libro.imagen && libro.isbn" src="https://covers.openlibrary.org/b/isbn/{{ libro.isbn }}-M.jpg" alt="{{ libro.nombre }}">
-    
-    <h3>{{ libro.nombre }}</h3>
-    <p><strong>Editorial:</strong> {{ libro.marca | uppercase }}</p>
-    <p *ngIf="libro.isbn"><strong>ISBN:</strong> {{ libro.isbn }}</p>
-    <p style="font-size: 1.1rem; color: #d35400;"><strong>Precio:</strong> {{ libro.precio | currency }}</p>
-    
-    <p *ngIf="libro.stock > 0" style="color: green;">Disponibles: {{ libro.stock }}</p>
-    <p *ngIf="libro.stock === 0" style="color: red;">Agotado</p>
-    
-    <div style="display: flex; gap: 10px; margin-top: 15px;">
-      <button [routerLink]="['/productos', libro.id]" style="padding: 8px 15px; cursor: pointer;">Ver Detalles</button>
-      <button style="padding: 8px 15px; background-color: #28a745; color: white; border: none; cursor: pointer;">Agregar al Carrito</button>
+    <div class="filtro-grupo">
+      <label>Categoría</label>
+      <select>
+        <option value="">Todas</option>
+        <option value="ficcion">Ficción</option>
+        <option value="fantasia">Fantasía</option>
+        <option value="terror">Terror</option>
+      </select>
     </div>
-    
+
+    <div class="filtro-grupo">
+      <label>Precio Máximo</label>
+      <input type="range" min="0" max="2000" step="50">
+      <div class="rango-valores">
+        <span>$0</span>
+        <span>$2000</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="catalogo-main">
+    <h2 class="title">Catálogo de Libros</h2>
+
+    <div class="catalogo-grid">
+      <div *ngFor="let libro of libros" class="card-libro">
+        
+        <div class="portada-container">
+          <img *ngIf="libro.imagen" [src]="libro.imagen" alt="{{libro.nombre}}">
+          <img *ngIf="!libro.imagen && libro.isbn"
+               src="https://covers.openlibrary.org/b/isbn/{{ libro.isbn }}-M.jpg" alt="{{libro.nombre}}">
+        </div>
+
+        <div class="info-libro">
+          <h3>{{ libro.nombre }}</h3>
+          <p class="editorial">{{ libro.marca }}</p>
+          <p class="precio">{{ libro.precio | currency }}</p>
+
+          <p class="stock ok" *ngIf="libro.stock > 0">Disponible</p>
+          <p class="stock no" *ngIf="libro.stock === 0">Agotado</p>
+
+          <div class="acciones">
+            <button [routerLink]="['/productos', libro.id]" class="btn-ver">Ver</button>
+            <button class="carrito">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

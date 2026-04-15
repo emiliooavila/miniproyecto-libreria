@@ -1,0 +1,76 @@
+.inicio {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.sub {
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  /* Efecto de carrusel suave */
+  scroll-snap-type: x mandatory; 
+}
+
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.carousel img {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 600px;
+  height: 250px;
+  border-radius: 8px;
+  object-fit: cover;
+  scroll-snap-align: center;
+}
+
+.carousel.small img {
+  max-width: 150px;
+  height: 100px;
+}
+
+.section-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.cta {
+  margin-top: 30px;
+}
+
+.cta button {
+  padding: 8px 15px;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.cta button:hover {
+  background: #c40000;
+}

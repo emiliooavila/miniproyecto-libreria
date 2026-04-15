@@ -1,32 +1,29 @@
-<div *ngIf="libro" style="padding: 20px; max-width: 600px; margin: auto;">
-  
-  <button routerLink="/catalogo" style="margin-bottom: 20px; padding: 5px 10px; cursor: pointer;">
-    ⬅ Volver al catálogo
-  </button>
-  
-  <div style="display: flex; gap: 20px;">
-    <img *ngIf="libro.imagen" [src]="libro.imagen" alt="{{ libro.nombre }}" width="250">
-    <img *ngIf="!libro.imagen && libro.isbn" src="https://covers.openlibrary.org/b/isbn/{{ libro.isbn }}-L.jpg" alt="{{ libro.nombre }}" width="250">
-    
-    <div>
-      <h1>{{ libro.nombre }}</h1>
-      <h3 style="color: gray;">{{ libro.marca }}</h3>
-      
-      <p style="font-size: 1.2rem; color: #d35400;"><strong>{{ libro.precio | currency }}</strong></p>
-      
-      <p *ngIf="libro.isbn"><strong>ISBN:</strong> {{ libro.isbn }}</p>
-      
-      <p style="margin-top: 20px;"><strong>Sinopsis:</strong><br> {{ libro.descripcion }}</p>
-      <p><strong>Categoría:</strong> {{ libro.categoria }}</p>
-      <p><strong>Disponibles:</strong> {{ libro.stock }}</p>
-      
-      <button style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; margin-top: 10px;">
-        Comprar Ahora
-      </button>
-    </div>
-  </div>
-</div>
+<div *ngIf="libro" class="detalle">
 
-<div *ngIf="!libro" style="padding: 20px; text-align: center; font-size: 1.2rem;">
-  <p>Cargando información del libro...</p>
+  <button routerLink="/catalogo" class="volver">
+    ⬅ Volver
+  </button>
+
+  <div class="contenedor">
+
+    <img *ngIf="libro.imagen" [src]="libro.imagen">
+    <img *ngIf="!libro.imagen && libro.isbn"
+         src="https://covers.openlibrary.org/b/isbn/{{ libro.isbn }}-L.jpg">
+
+    <div class="info">
+      <h1>{{ libro.nombre }}</h1>
+      <p class="editorial">{{ libro.marca }}</p>
+
+      <p class="precio">{{ libro.precio | currency }}</p>
+
+      <p><b>ISBN:</b> {{ libro.isbn }}</p>
+      <p><b>Categoría:</b> {{ libro.categoria }}</p>
+      <p><b>Stock:</b> {{ libro.stock }}</p>
+
+      <p class="desc">{{ libro.descripcion }}</p>
+
+      <button class="comprar">Comprar</button>
+    </div>
+
+  </div>
 </div>

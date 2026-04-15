@@ -1,0 +1,52 @@
+.detalle {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  color: white;
+}
+
+.volver {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.contenedor {
+  display: flex;
+  gap: 20px;
+}
+
+.contenedor img {
+  width: 250px;
+  border-radius: 8px;
+}
+
+.info h1 {
+  margin: 0;
+}
+
+.editorial {
+  color: gray;
+  font-size: 14px;
+}
+
+.precio {
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.desc {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.comprar {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
