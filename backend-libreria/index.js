@@ -5,7 +5,6 @@ const mysql = require('mysql2/promise');
 const app = express();
 const PORT = 3000;
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 
@@ -56,7 +55,6 @@ app.post('/api/mensajes', async (req, res) => {
     }
 });
 
-// Obtener un solo objeto libro por ID 
 app.get('/api/productos/:id', async (req, res) => {
     try {
         const [rows] = await db.query('SELECT * FROM productos WHERE id = ?', [req.params.id]);

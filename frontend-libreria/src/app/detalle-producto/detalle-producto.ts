@@ -8,7 +8,8 @@ import { ProductosService } from '../services/productos';
   selector: 'app-detalle-producto',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  templateUrl: './detalle-producto.html'
+  templateUrl: './detalle-producto.html',
+  styleUrl: './detalle-producto.css'
 })
 export class DetalleProductoComponent implements OnInit {
   libro: any;

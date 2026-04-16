@@ -51,3 +51,16 @@
   background: #ff4d4d !important;
   color: white;
 }
+
+.logo-container {
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* Centra verticalmente la imagen y el texto */
+  gap: 12px; /* Espacio entre la imagen y el texto */
+}
+
+.logo-img {
+  height: 40px; /* Ajusta este valor dependiendo de qué tan grande sea tu logo */
+  width: auto;
+  object-fit: contain;
+}
