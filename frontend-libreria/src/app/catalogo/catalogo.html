@@ -4,20 +4,20 @@
     
     <div class="filtro-grupo">
       <label>Categoría</label>
-      <select>
+      <select [(ngModel)]="categoriaSeleccionada">
         <option value="">Todas</option>
-        <option value="ficcion">Ficción</option>
-        <option value="fantasia">Fantasía</option>
-        <option value="terror">Terror</option>
+        <option value="Ciencia Ficcion">Ciencia Ficción</option>
+        <option value="Fantasia">Fantasía</option>
+        <option value="Terror">Terror</option>
       </select>
     </div>
 
     <div class="filtro-grupo">
       <label>Precio Máximo</label>
-      <input type="range" min="0" max="2000" step="50">
+      <input type="range" min="0" max="2000" step="50" [(ngModel)]="precioMaximo">
       <div class="rango-valores">
         <span>$0</span>
-        <span>$2000</span>
+        <span>{{ precioMaximo | currency }}</span> 
       </div>
     </div>
   </aside>
@@ -26,7 +26,7 @@
     <h2 class="title">Catálogo de Libros</h2>
 
     <div class="catalogo-grid">
-      <div *ngFor="let libro of libros" class="card-libro">
+      <div *ngFor="let libro of librosFiltrados" class="card-libro">
         
         <div class="portada-container">
           <img *ngIf="libro.imagen" [src]="libro.imagen" alt="{{libro.nombre}}">
