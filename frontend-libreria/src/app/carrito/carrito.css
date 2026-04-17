@@ -1,0 +1,226 @@
+.carrito-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.carrito-container h2 {
+  color: white;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+.carrito-vacio {
+  text-align: center;
+  background: #111;
+  padding: 80px 20px;
+  border-radius: 12px;
+  border: 1px solid #333;
+}
+
+.carrito-vacio p {
+  color: #ccc;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: #e10600;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: transform 0.2s, background 0.3s;
+}
+.btn-primary:hover { 
+  background: #ff1a1a;
+  transform: translateY(-2px); 
+}
+
+.carrito-contenido {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.items-lista {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.carrito-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  gap: 20px;
+  transition: background 0.3s;
+}
+.carrito-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.carrito-item img {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.item-info {
+  flex: 1;
+}
+.item-info h3 { margin: 0 0 8px 0; font-size: 1.2rem; color: #fff;}
+.item-info .precio-unitario { margin: 0; color: #888; font-size: 0.95rem;}
+
+.item-controles {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #222;
+  padding: 8px 12px;
+  border-radius: 20px;
+}
+.btn-cantidad {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0 8px;
+  border-radius: 50%;
+  transition: color 0.2s;
+}
+.btn-cantidad:hover { color: #ff4d4d; }
+.cantidad { font-weight: bold; width: 20px; text-align: center; color: white; }
+
+.item-subtotal {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #ff4d4d;
+  min-width: 100px;
+  text-align: right;
+}
+
+.btn-eliminar {
+  background: rgba(255,0,0,0.1);
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn-eliminar:hover { 
+  background: rgba(255,0,0,0.3); 
+  transform: scale(1.1);
+}
+
+.carrito-resumen {
+  width: 320px;
+  background: radial-gradient(circle at top right, rgba(225, 6, 0, 0.12), transparent 40%), #111;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 40px;
+}
+
+.carrito-resumen h3 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 15px;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.resumen-fila {
+  display: flex;
+  justify-content: space-between;
+  color: #ccc;
+  margin-bottom: 15px;
+  font-size: 1.05rem;
+}
+
+.resumen-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  margin: 25px 0;
+  padding-top: 20px;
+  border-top: 1px dashed #444;
+}
+
+.btn-pagar {
+  width: 100%;
+  padding: 16px;
+  background: #e10600;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn-pagar:hover { 
+  background: #ff1a1a; 
+  transform: translateY(-2px);
+}
+
+@media (max-width: 850px) {
+  .carrito-contenido {
+    flex-direction: column;
+  }
+  .carrito-resumen {
+    width: 100%;
+    position: static;
+  }
+  .carrito-item {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .item-info {
+    width: 100%;
+    order: -1;
+    margin-bottom: 10px;
+  }
+}
+
+/* Toast */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.toast {
+  background: #e10600;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-weight: 500;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

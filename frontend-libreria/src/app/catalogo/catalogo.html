@@ -44,10 +44,15 @@
 
           <div class="acciones">
             <button [routerLink]="['/productos', libro.id]" class="btn-ver">Ver</button>
-            <button class="carrito">Agregar</button>
+            <button class="carrito" (click)="agregarAlCarrito(libro)">Agregar</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast-container" *ngIf="toastMensaje">
+  <div class="toast">{{ toastMensaje }}</div>
 </div>

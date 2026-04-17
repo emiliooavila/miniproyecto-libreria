@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductosService } from '../services/productos';
+import { CarritoService } from '../services/carrito.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -15,9 +16,11 @@ export class CatalogoComponent implements OnInit {
   libros: any[] = [];
   categoriaSeleccionada: string = '';
   precioMaximo: number = 2000;
+  toastMensaje: string = '';
 
   constructor(
     private productosService: ProductosService,
+    private carritoService: CarritoService,
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef
   ) {}
@@ -44,5 +47,17 @@ export class CatalogoComponent implements OnInit {
       
       return coincideCategoria && coincidePrecio;
     });
+  }
+
+  agregarAlCarrito(libro: any) {
+    this.carritoService.agregarProducto(libro);
+    this.mostrarToast(`¡"${libro.nombre}" agregado al carrito!`);
+  }
+
+  mostrarToast(mensaje: string) {
+    this.toastMensaje = mensaje;
+    setTimeout(() => {
+      this.toastMensaje = '';
+    }, 2500);
   }
 }
