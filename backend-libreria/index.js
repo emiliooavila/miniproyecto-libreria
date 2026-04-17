@@ -31,16 +31,41 @@ app.get('/api/productos', async (req, res) => {
     }
 });
 
-app.post('/api/productos', async (req, res) => {
+const validarProducto = (req, res, next) => {
+    const { nombre, isbn, categoria, precio, stock, descripcion } = req.body;
+    
+    // Validacion de campos que no esten en blanco
+    if (!nombre || !isbn || !categoria || !descripcion) {
+        return res.status(400).json({ error: 'Faltan campos requeridos o están en blanco' });
+    }
+    // Validacion matematica del precio y stock
+    if (precio <= 0) {
+        return res.status(400).json({ error: 'El precio debe ser un número positivo mayor a 0' });
+    }
+    if (stock < 0) {
+        return res.status(400).json({ error: 'El stock no puede ser un número negativo' });
+    }
+    
+    next();
+};
+
+app.post('/api/productos', validarProducto, async (req, res) => {
     try {
-        const { nombre, categoria, marca, precio, stock, imagen, descripcion } = req.body;
+        const { nombre, isbn, categoria, marca, precio, stock, imagen, descripcion, disponible } = req.body;
+        
+        // Conversiones por seguridad para el FrontEnd
+        const esDisponible = disponible !== undefined ? disponible : true;
+        const img = imagen || '';
+        const mrc = marca || '';
+
         const [result] = await db.query(
-            'INSERT INTO productos (nombre, categoria, marca, precio, stock, imagen, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [nombre, categoria, marca, precio, stock, imagen, descripcion]
+            'INSERT INTO productos (nombre, isbn, categoria, marca, precio, stock, imagen, descripcion, disponible) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [nombre, isbn, categoria, mrc, precio, stock, img, descripcion, esDisponible]
         );
         res.status(201).json({ id: result.insertId, mensaje: 'Libro agregado al catálogo' });
     } catch (error) {
-        res.status(500).json({ error: 'Error al guardar el libro' });
+        console.error('Error insertando libro:', error);
+        res.status(500).json({ error: 'Error al guardar el libro en la base de datos' });
     }
 });
 

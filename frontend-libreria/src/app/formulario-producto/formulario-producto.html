@@ -1,0 +1,84 @@
+<div class="form-container" *ngIf="authService.esAdmin(); else noAdmin">
+  <div class="form-card">
+    <h2>Alta de Libros</h2>
+    <p>Agrega un nuevo título al catálogo de Alpha Proxima (Modo Admin)</p>
+
+    <form [formGroup]="productoForm" (ngSubmit)="guardar()" class="producto-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Título del Libro *</label>
+          <input type="text" id="nombre" formControlName="nombre" placeholder="Ej. El Principito">
+          <span class="error" *ngIf="productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched">El título es requerido.</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="marca">Editorial / Marca *</label>
+          <input type="text" id="marca" formControlName="marca" placeholder="Ej. Salamandra">
+          <span class="error" *ngIf="productoForm.get('marca')?.invalid && productoForm.get('marca')?.touched">La editorial es requerida.</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="categoria">Categoría *</label>
+          <select id="categoria" formControlName="categoria">
+            <option value="" disabled>Selecciona una...</option>
+            <option value="Ciencia Ficcion">Ciencia Ficción</option>
+            <option value="Fantasia">Fantasía</option>
+            <option value="Terror">Terror</option>
+            <option value="Programacion">Programación</option>
+            <option value="Infantil">Infantil</option>
+          </select>
+          <span class="error" *ngIf="productoForm.get('categoria')?.invalid && productoForm.get('categoria')?.touched">Selecciona una categoría.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="isbn">ISBN *</label>
+          <input type="text" id="isbn" formControlName="isbn" placeholder="Ej. 9789874561">
+          <span class="error" *ngIf="productoForm.get('isbn')?.invalid && productoForm.get('isbn')?.touched">El ISBN es fundamental para buscar la portada.</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="precio">Precio ($) *</label>
+          <input type="number" id="precio" formControlName="precio" min="1">
+          <span class="error" *ngIf="productoForm.get('precio')?.invalid && productoForm.get('precio')?.touched">Debe ser mayor a 0.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="stock">Stock inicial *</label>
+          <input type="number" id="stock" formControlName="stock" min="0">
+          <span class="error" *ngIf="productoForm.get('stock')?.invalid && productoForm.get('stock')?.touched">Asigna el stock inicial.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="imagen">URL de la Imagen (Opcional si hay ISBN)</label>
+        <input type="text" id="imagen" formControlName="imagen" placeholder="Dejar en blanco para usar la portada extraída de internet (vía el ISBN)">
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción / Sinopsis *</label>
+        <textarea id="descripcion" formControlName="descripcion" rows="4" placeholder="Breve resumen de la obra..."></textarea>
+        <span class="error" *ngIf="productoForm.get('descripcion')?.invalid && productoForm.get('descripcion')?.touched">Agrega una sinopsis.</span>
+      </div>
+
+      <button type="submit" class="btn-submit">Guardar Libro en Sistema</button>
+    </form>
+  </div>
+</div>
+
+<ng-template #noAdmin>
+  <div class="form-container">
+    <div class="form-card" style="text-align: center; max-width: 400px; margin: auto;">
+      <h2 style="color: #ff4d4d; margin-bottom: 20px;">Acceso Denegado</h2>
+      <p style="margin-bottom: 25px;">Necesitas iniciar sesion como 'admin' para entrar a esta consola remota de Alpha Proxima.</p>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Toast -->
+<div class="toast-container" *ngIf="toastMensaje">
+  <div class="toast">{{ toastMensaje }}</div>
+</div>

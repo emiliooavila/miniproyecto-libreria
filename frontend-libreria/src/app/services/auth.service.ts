@@ -13,6 +13,10 @@ export class AuthService {
     this.usuarioActual.set(nombre);
   }
 
+  esAdmin(): boolean {
+    return this.usuarioActual() === 'admin' || this.usuarioActual() === 'Admin';
+  }
+
   logout() {
     this.usuarioActual.set(null);
     this.carritoService.vaciarCarrito();
