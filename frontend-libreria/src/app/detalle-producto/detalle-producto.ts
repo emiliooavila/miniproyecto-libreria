@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductosService } from '../services/productos';
-
+import { CarritoService } from '../services/carrito.service';
 
 @Component({
   selector: 'app-detalle-producto',
@@ -13,10 +13,12 @@ import { ProductosService } from '../services/productos';
 })
 export class DetalleProductoComponent implements OnInit {
   libro: any;
+  toastMensaje: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private productosService: ProductosService,
+    private carritoService: CarritoService,
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef
   ) {}
@@ -38,5 +40,13 @@ export class DetalleProductoComponent implements OnInit {
         console.error('Error catastrófico al buscar el libro:', err);
       }
     });
+  }
+
+  agregarAlCarrito() {
+    if(this.libro) {
+      this.carritoService.agregarProducto(this.libro);
+      this.toastMensaje = `¡"${this.libro.nombre}" agregado al carrito!`;
+      setTimeout(() => this.toastMensaje = '', 2500);
+    }
   }
 }

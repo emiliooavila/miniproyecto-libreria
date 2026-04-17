@@ -22,8 +22,13 @@
 
       <p class="desc">{{ libro.descripcion }}</p>
 
-      <button class="comprar">Comprar</button>
+      <button class="comprar" (click)="agregarAlCarrito()">Comprar</button>
     </div>
 
   </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast-container" *ngIf="toastMensaje">
+  <div class="toast">{{ toastMensaje }}</div>
 </div>

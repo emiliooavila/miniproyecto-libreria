@@ -1,0 +1,52 @@
+<div class="carrito-container">
+  <h2>🛒 Tu Carrito de Compras</h2>
+  
+  <!-- Empty State -->
+  <div *ngIf="carritoService.items().length === 0" class="carrito-vacio">
+    <p>Aún no has agregado ningún libro al carrito.</p>
+    <a routerLink="/catalogo" class="btn-primary">Ver Catálogo</a>
+  </div>
+
+  <!-- Cart Items -->
+  <div *ngIf="carritoService.items().length > 0" class="carrito-contenido">
+    
+    <div class="items-lista">
+      <div *ngFor="let item of carritoService.items()" class="carrito-item">
+        <img *ngIf="item.producto.imagen" [src]="item.producto.imagen" alt="{{ item.producto.nombre }}">
+        <img *ngIf="!item.producto.imagen && item.producto.isbn" src="https://covers.openlibrary.org/b/isbn/{{ item.producto.isbn }}-S.jpg" alt="{{ item.producto.nombre }}">
+        
+        <div class="item-info">
+          <h3>{{ item.producto.nombre }}</h3>
+          <p class="precio-unitario">{{ item.producto.precio | currency }} c/u</p>
+        </div>
+
+        <div class="item-controles">
+          <button (click)="actualizarCantidad(item.producto.id, item.cantidad, -1)" class="btn-cantidad">-</button>
+          <span class="cantidad">{{ item.cantidad }}</span>
+          <button (click)="actualizarCantidad(item.producto.id, item.cantidad, 1)" class="btn-cantidad">+</button>
+        </div>
+
+        <div class="item-subtotal">
+          {{ (item.producto.precio * item.cantidad) | currency }}
+        </div>
+
+        <button (click)="carritoService.removerProducto(item.producto.id)" class="btn-eliminar" title="Quitar producto">🗑️</button>
+      </div>
+    </div>
+
+    <!-- Resumen -->
+    <div class="carrito-resumen">
+      <h3>Resumen del Pedido</h3>
+      <div class="resumen-fila">
+        <span>Artículos:</span>
+        <span>{{ carritoService.totalUnidades() }}</span>
+      </div>
+      <div class="resumen-total">
+        <span>Total a pagar:</span>
+        <span>{{ carritoService.totalPrecio() | currency }}</span>
+      </div>
+      <button class="btn-pagar" (click)="carritoService.vaciarCarrito()">Proceder al Pago</button>
+    </div>
+
+  </div>
+</div>
