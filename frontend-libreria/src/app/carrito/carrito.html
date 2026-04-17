@@ -1,5 +1,5 @@
 <div class="carrito-container">
-  <h2>🛒 Tu Carrito de Compras</h2>
+  <h2>Tu Carrito de Compras</h2>
   
   <!-- Empty State -->
   <div *ngIf="carritoService.items().length === 0" class="carrito-vacio">
@@ -30,7 +30,11 @@
           {{ (item.producto.precio * item.cantidad) | currency }}
         </div>
 
-        <button (click)="carritoService.removerProducto(item.producto.id)" class="btn-eliminar" title="Quitar producto">🗑️</button>
+        <button (click)="carritoService.removerProducto(item.producto.id)" class="btn-eliminar" title="Quitar producto">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
       </div>
     </div>
 
@@ -45,8 +49,12 @@
         <span>Total a pagar:</span>
         <span>{{ carritoService.totalPrecio() | currency }}</span>
       </div>
-      <button class="btn-pagar" (click)="carritoService.vaciarCarrito()">Proceder al Pago</button>
+      <button class="btn-pagar" (click)="procederAlPago()">Proceder al Pago</button>
     </div>
 
   </div>
+</div>
+
+<div class="toast-container" *ngIf="toastMensaje">
+  <div class="toast">{{ toastMensaje }}</div>
 </div>
