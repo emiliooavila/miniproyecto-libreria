@@ -12,18 +12,18 @@ export class ProductosService {
   constructor(private http: HttpClient) { }
 
   getProductos(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/productos`); 
+    return this.http.get(this.apiUrl);
   }
 
   getProductoById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/productos/${id}`);
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 
   enviarMensaje(datosMensaje: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/mensajes`, datosMensaje);
+    return this.http.post(this.mensajesUrl, datosMensaje);
   }
 
   agregarProducto(producto: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/productos`, producto);
+    return this.http.post(this.apiUrl, producto);
   }
 }
