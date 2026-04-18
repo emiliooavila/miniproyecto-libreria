@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductosService {
-  private apiUrl = 'http://localhost:3000/api'; 
+  private apiUrl = 'https://miniproyecto-libreria.onrender.com/api/productos'; 
+  private mensajesUrl = 'https://miniproyecto-libreria.onrender.com/api/mensajes';
 
   constructor(private http: HttpClient) { }
 
