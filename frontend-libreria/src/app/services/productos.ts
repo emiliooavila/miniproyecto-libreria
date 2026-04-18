@@ -21,4 +21,8 @@ export class ProductosService {
   enviarMensaje(datosMensaje: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/mensajes`, datosMensaje);
   }
+
+  agregarProducto(producto: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/productos`, producto);
+  }
 }
