@@ -73,12 +73,14 @@ app.post('/api/productos', validarProducto, async (req, res) => {
 app.post('/api/mensajes', async (req, res) => {
     try {
         const { nombre, correo, asunto, mensaje } = req.body;
+        const fechaActual = new Date().toLocaleString();
         const [result] = await db.query(
-            'INSERT INTO mensajes (nombre, correo, asunto, mensaje) VALUES (?, ?, ?, ?)',
-            [nombre, correo, asunto, mensaje]
+            'INSERT INTO mensajes (nombre, correo, asunto, mensaje, fecha_envio) VALUES (?, ?, ?, ?, ?)',
+            [nombre, correo, asunto, mensaje, fechaActual]
         );
         res.status(201).json({ id: result.insertId, mensaje: 'Mensaje de contacto guardado' });
     } catch (error) {
+        console.error('ERROR REAL AL GUARDAR MENSAJE:', error);
         res.status(500).json({ error: 'Error al guardar el mensaje' });
     }
 });
